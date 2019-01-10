@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6
+    restart: always
+    volumes:
+      - /tmp/database_backup:/var/lib/postgresql/data
+  web:
+    build: .
+    volumes:
+      - .:/blog
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
