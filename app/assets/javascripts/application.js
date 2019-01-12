@@ -12,5 +12,9 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require_tree .
+//= require jquery.min
+//= require popper.min
+//= require bootstrap.min
+//= require jquery.cookie
+//= require jquery.fancybox.min
+//= require front
