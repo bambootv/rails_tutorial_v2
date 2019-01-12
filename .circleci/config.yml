@@ -7,16 +7,17 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.3-node-browsers
         environment:
           RAILS_ENV: test
-          DB_HOST: 127.0.0.1
-          DB_PASSWORD: ""
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
       - image: circleci/postgres:9.6-alpine # database image
         environment: # environment variables for database
-          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_USER: postgres
           POSTGRES_DB: blog_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: postgres
 
     working_directory: ~/repo
 
@@ -43,7 +44,7 @@ jobs:
       # Database setup
       - run:
           name: Wait for db
-          command: dockerize -wait tcp://127.0.0.1:3307 -timeout 1m
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
 
       - run: echo "$MASTER_KEY_CI" > config/master.key
       - run: bundle exec rake db:create
@@ -57,7 +58,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            bundle exec rspec --format documentation spec/**/*_spec.rb
+            bundle exec rspec --format documentation
             # mkdir /tmp/test-results
             # TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 

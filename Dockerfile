@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.3
 LABEL author="hoanki2212@gmail.com"
 RUN apt-get update && \
     apt-get install -y nodejs nano vim
