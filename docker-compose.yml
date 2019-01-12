@@ -1,15 +1,21 @@
 version: "3"
 services:
-  db:
+  database:
     image: postgres:9.6
     restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
     volumes:
       - /tmp/database_backup:/var/lib/postgresql/data
-  web:
+  app:
     build: .
     volumes:
       - .:/blog
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_USER: postgres
+      DATABASE_HOST: database
+      DATABASE_PASSWORD: postgres
     depends_on:
-      - db
+      - database
