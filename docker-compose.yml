@@ -1,13 +1,22 @@
 version: "3"
 services:
-  database:
+  postgres:
+    container_name: postgres
     image: postgres:9.6
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
       - /tmp/database_backup:/var/lib/postgresql/data
+  spring:
+    container_name: spring
+    build: .
+    volumes:
+      - .:/blog
+    restart: always
+    command: "bundle exec spring server"
   app:
+    container_name: app
     build: .
     volumes:
       - .:/blog
@@ -15,7 +24,5 @@ services:
       - "3000:3000"
     environment:
       DATABASE_USER: postgres
-      DATABASE_HOST: database
+      DATABASE_HOST: postgres
       DATABASE_PASSWORD: postgres
-    depends_on:
-      - database
