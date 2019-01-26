@@ -21,5 +21,5 @@
  <!-- theme stylesheet-->
  *= require style.default
  <!-- Custom stylesheet - for your changes-->
- 
+ *= require simplemde.min
  */

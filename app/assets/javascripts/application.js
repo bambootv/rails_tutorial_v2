@@ -18,3 +18,5 @@
 //= require jquery.cookie
 //= require jquery.fancybox.min
 //= require front
+//= require simplemde.min
+//= require config_markdown
