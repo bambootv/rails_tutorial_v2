@@ -18,3 +18,5 @@ rspecs:
 	docker-compose run --rm app spring rspec
 rubocop:
 	docker-compose run --rm app spring rubocop -a
+routes:
+	docker-compose run --rm app rails routes
