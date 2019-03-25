@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_161542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "content"
     t.datetime "created_at", null: false
